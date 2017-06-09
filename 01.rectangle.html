@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>three.js - ASCII Effect</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<style>
+			body {
+				font-family: Monospace;
+				margin: 0;
+				padding: 0;
+				overflow: hidden;
+			}
+			canvas	{ background: #fff; }
+		</style>
+	</head>
+	<body>
+
+		<script src="js/three.js"></script>
+
+		<script>
+
+			// 이코드는 800x640 캔버스를 생성, 문서의 본문에 추가하여 three.js 장면 초기화
+			var renderer = new THREE.WebGLRenderer();
+			renderer.setSize(800, 640); // canvas 사이즈
+			renderer.setClearColor( 'moccasin' ); // canvas 배경색
+			document.body.appendChild(renderer.domElement);
+
+			var scene = new THREE.Scene();
+
+			// 카메라 선언
+			var camera = new THREE.PerspectiveCamera(
+				35,                // 필드를 얼마나 넓게 볼 것인지
+				800 / 640,      // 화면 비율
+				.1,                // 파라미터는 카메라의 뷰에서 객체에 대한 절단 포인트
+				10000            // 파라미터는 카메라의 뷰에서 객체에 대한 절단 포인트
+			);
+			camera.position.set( -15, 10, 15 ); // X, Y, Z
+			camera.lookAt( scene.position );
+			scene.add( camera );
+
+			// 가로, 높이, 깊이 각각 5유닛인 큐브 생성
+			var cube = new THREE.Mesh(
+				new THREE.CubeGeometry( 5, 5, 5 ), // 생성
+				new THREE.MeshLambertMaterial( {  color: 'mediumturquoise' } ) // 재질
+			);
+			scene.add( cube );
+
+			// 노란 빛
+			var light = new THREE.PointLight( 'mediumturquoise' );
+			light.position.set( 10, 0, 10 );
+			scene.add( light );
+
+			renderer.render( scene, camera );
+		</script>
+	</body>
+</html>
