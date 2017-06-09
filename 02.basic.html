@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>three.js - ASCII Effect</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<style>
+			body {
+				font-family: Monospace;
+				margin: 0;
+				padding: 0;
+				overflow: hidden;
+			}
+		</style>
+	</head>
+	<body>
+
+		<script src="js/three.js"></script>
+
+		<script>
+			var width = window.innerWidth;
+			var height = window.innerHeight;
+			var renderer = new THREE.WebGLRenderer(); // Renderer 객체 생성.
+			document.body.appendChild(renderer.domElement);
+			renderer.setClearColor( 'aqua' ); // canvas 배경색
+			renderer.setSize(width, height);
+
+			var scene = new THREE.Scene();  // Scene(세계) 객체 생성 default
+
+			// Mesh 객체를 위한 보조 객체
+			var geometry = new THREE.CubeGeometry(100, 100, 0);
+			var material = new THREE.MeshLambertMaterial({
+				emissive: 'coral'  // Mesh 색상
+			});
+
+			// Mesh 객체
+			var mesh = new THREE.Mesh(geometry, material);
+			mesh.position.set(0, 0, 0);
+			scene.add(mesh);  // 세계에 mesh 추가
+
+			var camera = new THREE.PerspectiveCamera();  // Camera 객체 생성
+			camera.position.set(0, 0, 200);
+
+			renderer.render(scene, camera);  // Scene, camera 호출
+		</script>
+	</body>
+</html>
